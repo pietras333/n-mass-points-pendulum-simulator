@@ -1,6 +1,11 @@
 # 🌀 N‑Mass Points Pendulum Simulator
 
 A **scientific and visual exploration** of multi‑pendulum dynamics, inspired by research on chaotic motion of coupled pendulums. This simulator models pendulums with **3 or more masses**, solves their motion using rigorous physics, and provides a **real‑time visualizer** with velocity‑based trails.
+<img width="1897" height="865" alt="image" src="https://github.com/user-attachments/assets/6961164f-861e-45b8-9047-e2682c039f9e" />
+
+
+https://github.com/user-attachments/assets/b223f54b-6794-428a-9f7e-16db154b0dfc
+
 
 ---
 
