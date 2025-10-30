@@ -1,72 +1,80 @@
-# 🌀 N-Mass Points Pendulum Simulator
+# 🌀 N‑Mass Points Pendulum Simulator
 
-A **scientific and visual exploration** of multi-pendulum dynamics, inspired by research on chaotic motion of coupled pendulums. This simulator models pendulums with **3 or more masses**, solves their motion using rigorous physics, and provides a **real-time visualizer** with velocity-based trails.
+A **scientific and visual exploration** of multi‑pendulum dynamics, inspired by research on chaotic motion of coupled pendulums. This simulator models pendulums with **3 or more masses**, solves their motion using rigorous physics, and provides a **real‑time visualizer** with velocity‑based trails.
 
 ---
 
 ## 🔬 Research Basis
 
-This project is grounded in scientific research, following methods outlined in:
+This project is grounded in scientific research and builds on key references:
 
-**Double Pendulum Dynamics** – T. Müller et al., Max Planck Institute  
-[PDF](https://www2.mpia-hd.mpg.de/homes/tmueller/pdfs/doublePendulum.pdf)
+- **D. Assêncio**, *“Double pendulum: Hamiltonian formulation”* ([Link](https://dassencio.org/33))  
+  Derivation of double pendulum equations from Hamiltonian/Lagrangian mechanics.
 
-Key points from the paper implemented:
+- **J. Jiménez‑López & V.J. García‑Garrido**, *“Chaos and Regularity in the Double Pendulum with Lagrangian Descriptors”* ([arxiv](https://arxiv.org/html/2403.07000v1?utm_source=chatgpt.com))  
+  Quantification of chaos using Lagrangian descriptors.
 
-- Equations of motion derived from **Lagrangian mechanics**.
-- Coupled, nonlinear system of ordinary differential equations (ODEs) for **n pendulum masses**.
-- **Runge-Kutta 4th order (RK4)** integration for stable and accurate time evolution.
-- Supports arbitrary number of masses (≥3), including **chaotic motion** analysis.
+- **B. Yesilyurt**, *“Equations of Motion Formulation of a Pendulum Containing N-point Masses”* ([arxiv](https://arxiv.org/pdf/1910.12610?utm_source=chatgpt.com))  
+  General formulation for **n‑mass pendulums**, providing the framework used for simulations with 3 or more masses.
+
+Key points from these works implemented:
+
+- Equations of motion derived from **Lagrangian / Hamiltonian mechanics**.  
+- **Double pendulum (n = 2)**: classical coupled nonlinear ODEs.  
+- **Multi-mass pendulums (n ≥ 3)**: generalized via mass matrix and coupling terms (see `PendulumSolver.cs`).  
+- **Runge‑Kutta 4th order (RK4)** integration with configurable sub-steps for stability and accuracy.  
+- Sensitivity to initial conditions and emergence of chaotic dynamics naturally appear in simulations.
 
 ---
 
 ## 🧮 Mathematics Behind It
 
-- **Single pendulum:**  
-  \[
-  \alpha = -\frac{g}{L} \sin(\theta)
-  \]
+<img width="767" height="224" alt="image" src="https://github.com/user-attachments/assets/4b5b7149-3663-4a8f-a8c1-9c7f6bc55ef5" />
 
-- **Double pendulum:** Nonlinear coupled ODEs solved per Müller et al., with accelerations computed as:  
-\[
-\ddot{\theta}_i = f(\theta_1, \theta_2, \dots, \theta_n, \dot{\theta}_1, \dots, \dot{\theta}_n, m_i, L_i)
-\]
 
-- **Multiple pendulums (n > 2):**  
-  Generalized mass matrix and coupling terms are solved with **linear algebra** and Gaussian elimination.
+- **Double pendulum (n = 2)**:  
 
-- **Integration:** **RK4 method** with configurable sub-steps for high-precision simulation.
+- **General n‑mass pendulum (n ≥ 3)**:  
+
+
+- **Integration**: RK4 with `subSteps` per frame:  
+
+- **Chaos and energy**: Following Jiménez‑López & García‑Garrido, chaos fraction depends on energy, mass ratios, and length ratios.
 
 ---
 
 ## 🎮 Features
 
-- ✅ Supports **3 or more pendulum masses**.
-- ✅ Real-time visualization with **velocity-based trail colors**.
-- ✅ Custom shader for smooth, colorful trails.
-- ✅ Adjustable **rod width**, **mass radius**, and **trail length**.
-- ✅ Chaos-friendly physics, allowing study of sensitive dependence on initial conditions.
+- ✅ Supports **3 or more pendulum masses**  
+- ✅ Real-time visualization with **velocity-based trail colors**  
+- ✅ Custom shader for smooth, colorful trails  
+- ✅ Adjustable **rod width**, **mass radius**, **trail length**, and **velocity gradient**  
+- ✅ Sensitive dynamics, allowing chaos and regularity studies  
 
 ---
 
 ## ⚙️ Usage
 
-1. Open project in **Unity**.
-2. Add `PendulumSolver` and `PendulumFullRenderer` components to an empty GameObject.
-3. Configure **mass points** in the inspector (`Mass`, `Rod Length`, `Initial Angle`).
-4. Press **Play** to simulate and visualize pendulum motion.
+1. Open the project in **Unity**.  
+2. Add `PendulumSolver` and `PendulumFullRenderer` to an empty GameObject.  
+3. Configure mass points (`Mass`, `AttachedRodLength`, `InitialAngleDegrees`, `AngularVelocity`).  
+4. Adjust `subSteps` in `PendulumSolver` for numerical stability.  
+5. Customize visual parameters in `PendulumFullRenderer` (trail length, gradient, rod width, mass radius).  
+6. Press **Play** to simulate and visualize pendulum motion.
 
 ---
 
 ## 🎨 Visualization
 
-- Trails are colored according to **mass velocity**, using a gradient.
-- Rods and masses are drawn with vibrant, configurable colors.
-- Supports multiple mass points simultaneously with smooth, connected trails.
+- Trails colored by instantaneous angular velocity.  
+- Rods connecting masses with configurable colors and widths.  
+- Mass points rendered as spheres, with color indicating speed.  
+- Z-offsets per mass ensure distinct trails for multiple pendulums.
 
 ---
 
 ## 📚 References
 
-- Müller, T., et al., *Double Pendulum Dynamics*, Max Planck Institute  
-  [PDF](https://www2.mpia-hd.mpg.de/homes/tmueller/pdfs/doublePendulum.pdf)
+- Assêncio, D., *Double pendulum: Hamiltonian formulation*, https://dassencio.org/33  
+- Jiménez‑López, J. & García‑Garrido, V.J., *Chaos and Regularity in the Double Pendulum with Lagrangian Descriptors*, arXiv:2403.07000  
+- Yesilyurt, B., *Equations of Motion Formulation of a Pendulum Containing N-point Masses*, arXiv:1910.12610  
